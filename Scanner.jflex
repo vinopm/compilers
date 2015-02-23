@@ -99,6 +99,8 @@ float = {int} "." [0-9]+
 	"foreach" { return symbol(sym.FOREACH); }
 	"fi" 	 { return symbol(sym.FI); }
 	"in" 	 { return symbol(sym.IN); }
+	"true"	 {return symbol(BOOL_LITERAL, Boolean.TRUE);}
+	"false"	 {return symbol(BOOL_LITERAL, Boolean.FALSE);}
 	"'"	 { yybegin(IN_SINGLE_QUOTE); }
 
 	[ \t\r\n\f]+ 	 {}
