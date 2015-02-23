@@ -87,7 +87,7 @@ parser code {:
 terminal  EXCLAMATION, AMPERSANDAMPERSAND, MINUS, PLUS, ASTERISK, FSLASH, CARAT, LSQUAREBRACKET, RSQUAREBRACKET, LBRACKET, RBRACKET, COLONCOLON, COLON, LTHAN, MTHAN, PIPEPIPE, LTHANEQUALITY, IMPLICATION, EXCLAMATIONEQUALITY, SEMICOLON, LBRACE, RBRACE, DOT, COMMA, EQUALITY, EQUALITYEQUALITY, TDEF, FDEF, WHILE, RETURN, READ, PRINT, IF, ELSE, FI, FOREACH, IDENTIFIER, DO, OD, IN;
 terminal String STRING_LITERAL, CHAR_LITERAL, INTEGER_LITERAL, FLOAT_LITERAL, RAT_LITERAL;
 
-non terminal list, commaSeparatedList, inhabitedCommaSeparatedList, tdef, tuple, inhabitedCommaSeparatedIdentifierKeyList, dict, commaSeparatedKeyList, inhabitedCommaSeparatedKeyList, varDeclaration, varSpec, funDeclaration, commaSeparatedVarSpecList, inhabitedCommaSeparatedVarSpecList, variable, varAssignment, statement, block, arraySlice, arrayAccess, expr ;
+non terminal list, commaSeparatedList, inhabitedCommaSeparatedList, tdef, seq, inhabitedCommaSeparatedIdentifierKeyList, dict, commaSeparatedKeyList, inhabitedCommaSeparatedKeyList, varDeclaration, varSpec, funDeclaration, commaSeparatedVarSpecList, inhabitedCommaSeparatedVarSpecList, variable, varAssignment, statement, block, arraySlice, arrayAccess, expr, dict;
 
 precedence left PIPEPIPE;
 precedence left AMPERSANDAMPERSAND;
@@ -114,7 +114,7 @@ varAssignment ::= variable EQUALITY expr;
 
 statement ::= varAssignment SEMICOLON | READ variable SEMICOLON | PRINT commaSeparatedList SEMICOLON | RETURN expr SEMICOLON | IF LBRACKET expr RBRACKET LBRACE block RBRACE ELSE LBRACE block RBRACE | WHILE expr DO LBRACE block RBRACE | FOREACH LBRACKET expr COLON IDENTIFIER RBRACKET LBRACE block RBRACE | expr SEMICOLON | varDeclaration SEMICOLON | tdef SEMICOLON | funDeclaration | SEMICOLON;
 
-expr ::= variable | dict | list | expr PLUS expr | expr MINUS expr | expr ASTERISK expr | expr FSLASH expr | expr CARAT expr | STRING_LITERAL | CHAR_LITERAL | INTEGER_LITERAL | FLOAT_LITERAL | expr IN expr | expr PIPEPIPE expr | expr AMPERSANDAMPERSAND expr | expr LTHAN expr | expr LTHANEQUALITY expr | expr EQUALITYEQUALITY expr | expr EXCLAMATIONEQUALITY expr | expr COLONCOLON expr | EXCLAMATION expr | IDENTIFIER tuple | LBRACKET expr RBRACKET | arraySlice;
+expr ::= variable | dict | list | expr PLUS expr | expr MINUS expr | expr ASTERISK expr | expr FSLASH expr | expr CARAT expr | STRING_LITERAL | CHAR_LITERAL | INTEGER_LITERAL | FLOAT_LITERAL | expr IN expr | expr PIPEPIPE expr | expr AMPERSANDAMPERSAND expr | expr LTHAN expr | expr LTHANEQUALITY expr | expr EQUALITYEQUALITY expr | expr EXCLAMATIONEQUALITY expr | expr COLONCOLON expr | EXCLAMATION expr | IDENTIFIER seq | LBRACKET expr RBRACKET | arraySlice;
 
 arraySlice ::= expr LSQUAREBRACKET expr COLON expr RSQUAREBRACKET;
 arrayAccess ::= expr LSQUAREBRACKET expr RSQUAREBRACKET;
@@ -123,11 +123,11 @@ list ::= LSQUAREBRACKET commaSeparatedList RSQUAREBRACKET;
 commaSeparatedList ::= | inhabitedCommaSeparatedList;
 inhabitedCommaSeparatedList ::= expr COMMA inhabitedCommaSeparatedList | expr;
 
-dict ::= LSQUAREBRACKETPIPE commaSeparatedKeyList PIPERSQUAREBRACKET;
+dict ::= LBRACE commaSeparatedKeyList RBRACE; 
 commaSeparatedKeyList ::= | inhabitedCommaSeparatedKeyList;
 inhabitedCommaSeparatedKeyList ::= expr COLON expr COMMA inhabitedCommaSeparatedKeyList | expr COLON expr;
 
 commaSeparatedVarSpecList ::= | inhabitedCommaSeparatedVarSpecList;
 inhabitedCommaSeparatedVarSpecList ::= varSpec COMMA  inhabitedCommaSeparatedVarSpecList | varSpec;
 
-tuple ::= LBRACKET commaSeparatedList RBRACKET;
+seq ::= LBRACKET commaSeparatedList RBRACKET;
