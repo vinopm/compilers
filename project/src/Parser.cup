@@ -83,7 +83,7 @@ parser code {:
 :}; 
 
 
-terminal  EXCLAMATION, AMPERSANDAMPERSAND, MINUS, PLUS, ASTERISK, FSLASH, CARAT, LSQUAREBRACKET, RSQUAREBRACKET, LBRACKET, RBRACKET, COLONCOLON, COLON, LTHAN, MTHAN, PIPEPIPE, LTHANEQUALITY, IMPLICATION, EXCLAMATIONEQUALITY, SEMICOLON, LBRACE, RBRACE, DOT, COMMA, EQUALITY, EQUALITYEQUALITY, TDEF, FDEF, WHILE, RETURN, READ, PRINT, IF, ELSE, FI, FOREACH, DO, OD, IN, BOOL, INT, STRING, RAT, FLOAT, CHAR, TOP, LEN, SEQ, THEN, DICT, MAIN, ALIAS, FORALL;
+terminal  EXCLAMATION, AMPERSANDAMPERSAND, MINUS, PLUS, ASTERISK, FSLASH, CARAT, LSQUAREBRACKET, RSQUAREBRACKET, LBRACKET, RBRACKET, COLONCOLON, COLON, LTHAN, MTHAN, PIPEPIPE, LTHANEQUALITY, IMPLICATION, EXCLAMATIONEQUALITY, SEMICOLON, LBRACE, RBRACE, DOT, COMMA, EQUALITY, EQUALITYEQUALITY, TDEF, FDEF, WHILE, RETURN, READ, PRINT, IF, ELSE, FI, DO, OD, IN, BOOL, INT, STRING, RAT, FLOAT, CHAR, TOP, LEN, SEQ, THEN, DICT, MAIN, ALIAS, FORALL, NEGATIVESIGN;
 
 terminal String STRING_CONSTANT, RAT_CONSTANT, IDENTIFIER, CHAR_CONSTANT;
 terminal Boolean BOOL_CONSTANT;
@@ -92,14 +92,37 @@ terminal Integer INT_CONSTANT;
 
 non terminal list, commaSeparatedList, inhabitedCommaSeparatedList, tdef, seq, inhabitedCommaSeparatedIdentifierKeyList, dict, commaSeparatedKeyList, inhabitedCommaSeparatedKeyList, varDeclaration, varSpec, funDeclaration, commaSeparatedVarSpecList, inhabitedCommaSeparatedVarSpecList, variable, varAssignment, statement, block, sequenceSlice, sequenceAccess, expr;
 
-precedence left PIPEPIPE;
-precedence left AMPERSANDAMPERSAND;
-precedence left EXCLAMATION;
-precedence left IN, LTHAN, LTHANEQUALITY, EXCLAMATIONEQUALITY, EQUALITYEQUALITY;
-precedence left PLUS, MINUS, COLONCOLON;
+precedence left PIPEPIPE, AMPERSANDAMPERSAND, IMPLICATION;
+precedence left EQUALITYEQUALITY, LTHAN, MTHAN, LTHANEQUALITY, EXCLAMATIONEQUALITY;
+precedence left PLUS, MINUS;
+precedence left IN, COLONCOLON;
 precedence left ASTERISK, FSLASH;
 precedence left CARAT;
-precedence left DOT;
+precedence left EXCLAMATION, NEGATIVESIGN;
+precedence left LBRACKET, RBRACKET;
+
+
+
+program ::= listdeclaration main declarations;
+
+listdeclaration ::= | declaration listdeclaration;
+
+declaration ::= functionDef | globalVar | dataType | alias;
+
+dataType ::= TDEF IDENTIFIER LBRACE dataTypeDeclarationList RBRACE SEMICOLON;
+
+dataTypeDeclarationList ::= | dataTypeDeclaration;
+
+dataTypeDeclaration ::= IDENTIFIER COLON type | IDENTIFIER COLON type COMMA dataTypeDeclaration;
+
+
+
+
+
+
+
+
+
 
 block ::= statement block | | error block ;
 
@@ -134,3 +157,4 @@ commaSeparatedVarSpecList ::= | inhabitedCommaSeparatedVarSpecList;
 inhabitedCommaSeparatedVarSpecList ::= varSpec COMMA  inhabitedCommaSeparatedVarSpecList | varSpec;
 
 seq ::= LBRACKET commaSeparatedList RBRACKET;
+
