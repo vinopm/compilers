@@ -5,18 +5,18 @@ import java_cup.runtime.Symbol;
 
 
 /* Preliminaries to use the lexer.  */
-scan with {: return scanner.next_token(); :};
+//scan with {: return scanner.next_token(); :};
 
 
 parser code {: 
   public boolean syntaxErrors;
 
-  Lexer lexer;
+  //Lexer lexer;
 
-  public Parser(Lexer lex) {
+  /*public Parser(Lexer lex) {
       super(lex);
       lexer = lex;
-  }
+  }*/
 
   
   public void report_error(String message, Object info) {
@@ -77,14 +77,18 @@ parser code {:
     }
   }
 
-  public static void main(String args[]) throws Exception {
+  /*public static void main(String args[]) throws Exception {
     new Parser(new Lexer(new java.io.FileInputStream(args[0]))).parse();
-  }
+  }*/
 :}; 
 
 
-terminal  EXCLAMATION, AMPERSANDAMPERSAND, MINUS, PLUS, ASTERISK, FSLASH, CARAT, LSQUAREBRACKET, RSQUAREBRACKET, LBRACKET, RBRACKET, COLONCOLON, COLON, LTHAN, MTHAN, PIPEPIPE, LTHANEQUALITY, IMPLICATION, EXCLAMATIONEQUALITY, SEMICOLON, LBRACE, RBRACE, DOT, COMMA, EQUALITY, EQUALITYEQUALITY, TDEF, FDEF, WHILE, RETURN, READ, PRINT, IF, ELSE, FI, FOREACH, IDENTIFIER, DO, OD, IN;
-terminal String STRING_LITERAL, CHAR_LITERAL, INTEGER_LITERAL, FLOAT_LITERAL, RAT_LITERAL;
+terminal  EXCLAMATION, AMPERSANDAMPERSAND, MINUS, PLUS, ASTERISK, FSLASH, CARAT, LSQUAREBRACKET, RSQUAREBRACKET, LBRACKET, RBRACKET, COLONCOLON, COLON, LTHAN, MTHAN, PIPEPIPE, LTHANEQUALITY, IMPLICATION, EXCLAMATIONEQUALITY, SEMICOLON, LBRACE, RBRACE, DOT, COMMA, EQUALITY, EQUALITYEQUALITY, TDEF, FDEF, WHILE, RETURN, READ, PRINT, IF, ELSE, FI, FOREACH, DO, OD, IN, BOOL, INT, STRING, RAT, FLOAT, CHAR, TOP, LEN, SEQ, THEN, DICT, MAIN, ALIAS, FORALL;
+
+terminal String STRING_CONSTANT, RAT_CONSTANT, IDENTIFIER, CHAR_CONSTANT;
+terminal Boolean BOOL_CONSTANT;
+terminal Float FLOAT_CONSTANT; 
+terminal Integer INT_CONSTANT;
 
 non terminal list, commaSeparatedList, inhabitedCommaSeparatedList, tdef, seq, inhabitedCommaSeparatedIdentifierKeyList, dict, commaSeparatedKeyList, inhabitedCommaSeparatedKeyList, varDeclaration, varSpec, funDeclaration, commaSeparatedVarSpecList, inhabitedCommaSeparatedVarSpecList, variable, varAssignment, statement, block, sequenceSlice, sequenceAccess, expr;
 
@@ -113,7 +117,7 @@ varAssignment ::= variable EQUALITY expr;
 
 statement ::= varAssignment SEMICOLON | READ variable SEMICOLON | PRINT commaSeparatedList SEMICOLON | RETURN expr SEMICOLON | IF LBRACKET expr RBRACKET LBRACE block RBRACE ELSE LBRACE block RBRACE | WHILE expr DO LBRACE block RBRACE | FOREACH LBRACKET expr COLON IDENTIFIER RBRACKET LBRACE block RBRACE | expr SEMICOLON | varDeclaration SEMICOLON | tdef SEMICOLON | funDeclaration | SEMICOLON;
 
-expr ::= variable | dict | list | expr PLUS expr | expr MINUS expr | expr ASTERISK expr | expr FSLASH expr | expr CARAT expr | STRING_LITERAL | CHAR_LITERAL | INTEGER_LITERAL | FLOAT_LITERAL | expr IN expr | expr PIPEPIPE expr | expr AMPERSANDAMPERSAND expr | expr LTHAN expr | expr LTHANEQUALITY expr | expr EQUALITYEQUALITY expr | expr EXCLAMATIONEQUALITY expr | expr COLONCOLON expr | EXCLAMATION expr | IDENTIFIER seq | LBRACKET expr RBRACKET | sequenceSlice;
+expr ::= variable | dict | list | expr PLUS expr | expr MINUS expr | expr ASTERISK expr | expr FSLASH expr | expr CARAT expr | STRING_CONSTANT | CHAR_CONSTANT | INT_CONSTANT | FLOAT_CONSTANT | expr IN expr | expr PIPEPIPE expr | expr AMPERSANDAMPERSAND expr | expr LTHAN expr | expr LTHANEQUALITY expr | expr EQUALITYEQUALITY expr | expr EXCLAMATIONEQUALITY expr | expr COLONCOLON expr | EXCLAMATION expr | IDENTIFIER seq | LBRACKET expr RBRACKET | sequenceSlice;
 
 sequenceSlice ::= expr LSQUAREBRACKET expr COLON expr RSQUAREBRACKET;
 sequenceAccess ::= expr LSQUAREBRACKET expr RSQUAREBRACKET;
