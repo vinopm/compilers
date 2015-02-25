@@ -107,7 +107,7 @@ program ::= listdeclaration main listdeclaration;
 
 listdeclaration ::= | declaration listdeclaration;
 
-declaration ::= functionDef | globalVarDef | dataTypeDef | aliasDef;
+declaration ::= functionDef | variableDef | dataTypeDef | aliasDef;
 
 dataTypeDef ::= TDEF IDENTIFIER LBRACE dataTypeDeclarationList RBRACE SEMICOLON;
 
@@ -137,7 +137,7 @@ functionParamsList ::= IDENTIFIER COLON type | IDENTIFIER COLON type COMMA funct
 
 returnType ::= | COLON type;
 
-globalVarDef ::= IDENTIFIER COLON type EQUALITY expr SEMICOLON;
+//globalVarDef ::= IDENTIFIER COLON type EQUALITY expr SEMICOLON;
 
 main ::= MAIN LBRACE body RBRACE;
 
@@ -228,7 +228,7 @@ index ::= LSQUAREBRACKET expr RSQUAREBRACKET;
 
 valueOfIndex ::= IDENTIFIER index | functionCallExpr index | LBRACKET expr RBRACKET index;
 
-substr ::= LSQUAREBRACKET expr COLON expr LSQUAREBRACKET | LSQUAREBRACKET expr COLON LSQUAREBRACKET | LSQUAREBRACKET COLON expr LSQUAREBRACKET;
+substr ::= LSQUAREBRACKET expr COLON expr RSQUAREBRACKET | LSQUAREBRACKET expr COLON RSQUAREBRACKET | LSQUAREBRACKET COLON expr RSQUAREBRACKET;
 
 substrValue ::= IDENTIFIER substr | functionCallExpr substr | LBRACKET expr RBRACKET substr;
 
