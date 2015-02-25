@@ -29,48 +29,70 @@ parser code {:
 	    System.out.print("Error in line "+symbol.left+", column "+symbol.right+":  ");
 
 	    switch(symbol.sym) {
-		case  2 : System.out.print( "UNEXPECTED  EXCLAMATION"); break;
-		case  3 : System.out.print( "UNEXPECTED  AMPERSANDAMPERSAND"); break;
-		case  4 : System.out.print( "UNEXPECTED  MINUS"); break;
-		case  5 : System.out.print( "UNEXPECTED  PLUS"); break;
-		case  6 : System.out.print( "UNEXPECTED  ASTERISK"); break;
-		case  7 : System.out.print( "UNEXPECTED  FSLASH"); break;
-		case  8 : System.out.print( "UNEXPECTED  CARAT"); break;
-		case  9 : System.out.print( "UNEXPECTED  LSQUAREBRACKET"); break;
-		case  10 : System.out.print( "UNEXPECTED  RSQUAREBRACKET"); break;
-		case  11 : System.out.print( "UNEXPECTED  LBRACKET"); break;
-		case  12 : System.out.print( "UNEXPECTED  RBRACKET"); break;
-		case  13 : System.out.print( "UNEXPECTED  COLONCOLON"); break;
-		case  14 : System.out.print( "UNEXPECTED  COLON"); break;
-		case  15 : System.out.print( "UNEXPECTED  LTHAN"); break;
-		case  16 : System.out.print( "UNEXPECTED  LTHANEQUALITY"); break;
-		case  17 : System.out.print( "UNEXPECTED  EXCLAMATIONEQUALITY"); break;
-		case  18 : System.out.print( "UNEXPECTED  SEMICOLON"); break;
-		case  19 : System.out.print( "UNEXPECTED  LBRACE"); break;
-		case  20 : System.out.print( "UNEXPECTED  RBRACE"); break;
-		case  21 : System.out.print( "UNEXPECTED  DOT"); break;
-		case  22 : System.out.print( "UNEXPECTED  COMMA"); break;
-		case  23 : System.out.print( "UNEXPECTED  LSQUAREBRACKETPIPE"); break;
-		case  24 : System.out.print( "UNEXPECTED  PIPERSQUAREBRACKET"); break;
-		case  25 : System.out.print( "UNEXPECTED  EQUALS"); break;
-		case  26 : System.out.print( "UNEXPECTED  EQUALSEQUALS"); break;
-		case  27 : System.out.print( "UNEXPECTED  TDEF"); break;
-		case  28 : System.out.print( "UNEXPECTED  FDEF"); break;
-		case  29 : System.out.print( "UNEXPECTED  WHILE"); break;
-		case  30 : System.out.print( "UNEXPECTED  RETURN"); break;
-		case  31 : System.out.print( "UNEXPECTED  READ"); break;
-		case  32 : System.out.print( "UNEXPECTED  PRINT"); break;
-		case  33 : System.out.print( "UNEXPECTED  IF"); break;
-		case  34 : System.out.print( "UNEXPECTED  ELSE"); break;
-		case  35 : System.out.print( "UNEXPECTED  FOREACH"); break;
-		case  36 : System.out.print( "UNEXPECTED  IDENTIFIER"); break;
-		case  37 : System.out.print( "UNEXPECTED  DO"); break;
-		case  38 : System.out.print( "UNEXPECTED  PIPEPIPE"); break;
-		case  39 : System.out.print( "UNEXPECTED  IN"); break;
-		case  40 : System.out.print( "UNEXPECTED  STRING_LITERAL"); break;
-		case  41 : System.out.print( "UNEXPECTED  CHAR_LITERAL"); break;
-		case  42 : System.out.print( "UNEXPECTED  INTEGER_LITERAL"); break;
-		case  43 : System.out.print( "UNEXPECTED  FLOAT_LITERAL"); break;
+	     case 0 : System.out.print( "EOF" ); break;
+	     case 1 : System.out.print( "error" ); break;
+		 case 2 : System.out.print( "UNEXPECTED EXCLAMATION"); break;
+		 case 3 : System.out.print( "UNEXPECTED AMPERSANDAMPERSAND"); break;
+		 case 4 : System.out.print( "UNEXPECTED MINUS"); break;
+		 case 5 : System.out.print( "UNEXPECTED PLUS"); break;
+		 case 6 : System.out.print( "UNEXPECTED ASTERISK"); break;
+		 case 7 : System.out.print( "UNEXPECTED FSLASH"); break;
+		 case 8 : System.out.print( "UNEXPECTED CARAT"); break;
+		 case 9 : System.out.print( "UNEXPECTED LSQUAREBRACKET"); break;
+		 case 10 : System.out.print( "UNEXPECTED RSQUAREBRACKET"); break;
+		 case 11 : System.out.print( "UNEXPECTED LBRACKET"); break;
+		 case 12 : System.out.print( "UNEXPECTED RBRACKET"); break;
+		 case 13 : System.out.print( "UNEXPECTED COLONCOLON"); break;
+		 case 14 : System.out.print( "UNEXPECTED COLON"); break;
+		 case 15 : System.out.print( "UNEXPECTED LTHAN"); break;
+		 case 16 : System.out.print( "UNEXPECTED MTHAN"); break;
+		 case 17 : System.out.print( "UNEXPECTED PIPEPIPE"); break;
+		 case 18 : System.out.print( "UNEXPECTED LTHANEQUALITY"); break;
+		 case 19 : System.out.print( "UNEXPECTED IMPLICATION"); break;
+		 case 20 : System.out.print( "UNEXPECTED EXCLAMATIONEQUALITY"); break;
+		 case 21 : System.out.print( "UNEXPECTED SEMICOLON"); break;
+		 case 22 : System.out.print( "UNEXPECTED LBRACE"); break;
+		 case 23 : System.out.print( "UNEXPECTED RBRACE"); break;
+		 case 24 : System.out.print( "UNEXPECTED DOT"); break;
+		 case 25 : System.out.print( "UNEXPECTED COMMA"); break;
+		 case 26 : System.out.print( "UNEXPECTED EQUALITY");break;
+		 case 27 : System.out.print( "UNEXPECTED EQUALITYEQUALITY"); break;
+		 case 28 : System.out.print( "UNEXPECTED TDEF"); break;
+		 case 29 : System.out.print( "UNEXPECTED FDEF"); break;
+		 case 30 : System.out.print( "UNEXPECTED WHILE"); break;
+		 case 31 : System.out.print( "UNEXPECTED RETURN"); break;
+		 case 32 : System.out.print( "UNEXPECTED READ"); break;
+		 case 33 : System.out.print( "UNEXPECTED PRINT"); break;
+		 case 34 : System.out.print( "UNEXPECTED IF"); break;
+		 case 35 : System.out.print( "UNEXPECTED ELSE"); break;
+		 case 36 : System.out.print( "UNEXPECTED FI"); break;
+		 case 37 : System.out.print( "UNEXPECTED DO"); break;
+		 case 38 : System.out.print( "UNEXPECTED OD"); break;
+		 case 39 : System.out.print( "UNEXPECTED IN"); break;
+		 case 40 : System.out.print( "UNEXPECTED BOOL"); break;
+		 case 41 : System.out.print( "UNEXPECTED INT"); break;
+		 case 42 : System.out.print( "UNEXPECTED STRING"); break;
+		 case 43 : System.out.print( "UNEXPECTED RAT"); break;
+		 case 44 : System.out.print( "UNEXPECTED FLOAT"); break;
+		 case 45 : System.out.print( "UNEXPECTED CHAR"); break;
+		 case 46 : System.out.print( "UNEXPECTED TOP"); break;
+		 case 47 : System.out.print( "UNEXPECTED LEN"); break;
+		 case 48 : System.out.print( "UNEXPECTED SEQ"); break;
+		 case 49 : System.out.print( "UNEXPECTED THEN"); break;
+		 case 50 : System.out.print( "UNEXPECTED DICT"); break;
+		 case 51 : System.out.print( "UNEXPECTED MAIN"); break;
+		 case 52 : System.out.print( "UNEXPECTED ALIAS"); break;
+
+		 case 53 : System.out.print( "UNEXPECTED FORALL"); break;
+		 case 54 : System.out.print( "UNEXPECTED NEGATIVESIGN"); break;
+		 case 55 : System.out.print( "UNEXPECTED STRING_CONSTANT"); break;
+		 case 56 : System.out.print( "UNEXPECTED RAT_CONSTANT");break;
+		 case 57 : System.out.print( "UNEXPECTED IDENTIFIER"); break;
+		 case 58 : System.out.print( "UNEXPECTED CHAR_CONSTANT"); break;
+		 case 59 : System.out.print( "UNEXPECTED BOOL_CONSTANT"); break;
+		 case 60 : System.out.print( "UNEXPECTED FLOAT_CONSTANT"); break;
+		 case 61 : System.out.print( "UNEXPECTED INT_CONSTANT"); break;
+		 default : System.out.print( "MISSED THE CASES"); break;
          }
          System.out.println(".");
 	    
@@ -83,14 +105,14 @@ parser code {:
 :}; 
 
 
-terminal  EXCLAMATION, AMPERSANDAMPERSAND, MINUS, PLUS, ASTERISK, FSLASH, CARAT, LSQUAREBRACKET, RSQUAREBRACKET, LBRACKET, RBRACKET, COLONCOLON, COLON, LTHAN, MTHAN, PIPEPIPE, LTHANEQUALITY, IMPLICATION, EXCLAMATIONEQUALITY, SEMICOLON, LBRACE, RBRACE, DOT, COMMA, EQUALITY, EQUALITYEQUALITY, TDEF, FDEF, WHILE, RETURN, READ, PRINT, IF, ELSE, FI, DO, OD, IN, BOOL, INT, STRING, RAT, FLOAT, CHAR, TOP, LEN, SEQ, THEN, DICT, MAIN, ALIAS, FORALL, NEGATIVESIGN;
+terminal EXCLAMATION, AMPERSANDAMPERSAND, MINUS, PLUS, ASTERISK, FSLASH, CARAT, LSQUAREBRACKET, RSQUAREBRACKET, LBRACKET, RBRACKET, COLONCOLON, COLON, LTHAN, MTHAN, PIPEPIPE, LTHANEQUALITY, IMPLICATION, EXCLAMATIONEQUALITY, SEMICOLON, LBRACE, RBRACE, DOT, COMMA, EQUALITY, EQUALITYEQUALITY, TDEF, FDEF, WHILE, RETURN, READ, PRINT, IF, ELSE, FI, DO, OD, IN, BOOL, INT, RAT, FLOAT, CHAR, TOP, LEN, SEQ, THEN, DICT, MAIN, ALIAS, FORALL, NEGATIVESIGN;
 
 terminal String STRING_CONSTANT, RAT_CONSTANT, IDENTIFIER, CHAR_CONSTANT;
 terminal Boolean BOOL_CONSTANT;
 terminal Float FLOAT_CONSTANT; 
 terminal Integer INT_CONSTANT;
 
-non terminal list, commaSeparatedList, inhabitedCommaSeparatedList, tdef, seq, inhabitedCommaSeparatedIdentifierKeyList, dict, commaSeparatedKeyList, inhabitedCommaSeparatedKeyList, varDeclaration, varSpec, funDeclaration, commaSeparatedVarSpecList, inhabitedCommaSeparatedVarSpecList, variable, varAssignment, statement, block, sequenceSlice, sequenceAccess, expr, type, listdeclaration, main, program, declaration, functionDef, globalVarDef, dataTypeDef, aliasDef, dataTypeDeclarationList, dataTypeDeclaration, primitiveDataType, aggregateDataType, sequenceType, dictType, typeseqdict, formal_parameter_list, body, returnType, functionParamsList, localVarDecs, statementDecs, variableDef, readStatement, printStatement, functionCallStatement, ifStatement, whileLoopStatement, forAllLoopStatement, returnStatement, assignment, functionCallExpr, paramsListOptions, paramsList, optionalElse, elseStatement, iterable, dictListOptions, dictList, lenExpr, other, valueOfIndex, substrValue, index, substr;
+non terminal seq_constant, dict_constant, statement, expr, type, listdeclaration, main, program, declaration, functionDef, dataTypeDef, aliasDef, dataTypeDeclarationList, dataTypeDeclaration, primitiveDataType, aggregateDataType, sequenceType, dictType, typeseqdict, formal_parameter_list, funcBody, returnType, functionParamsList, localVarDecs, statementDecs, variableDef, readStatement, printStatement, functionCallStatement, ifStatement, whileLoopStatement, forAllLoopStatement, returnStatement, assignment, functionCallExpr, paramsListOptions, paramsList, optionalElse, elseStatement, iterable, dictListOptions, dictList, lenExpr, other, valueOfIndex, substrValue, index, substr;
 
 precedence left PIPEPIPE, AMPERSANDAMPERSAND, IMPLICATION;
 precedence left EQUALITYEQUALITY, LTHAN, MTHAN, LTHANEQUALITY, EXCLAMATIONEQUALITY;
@@ -129,7 +151,7 @@ dictType ::= DICT LTHAN typeseqdict COMMA typeseqdict MTHAN;
 
 aliasDef ::= ALIAS type IDENTIFIER SEMICOLON;
 
-functionDef ::= FDEF IDENTIFIER LBRACKET formal_parameter_list RBRACKET LBRACE body RBRACE returnType SEMICOLON;
+functionDef ::= FDEF IDENTIFIER LBRACKET formal_parameter_list RBRACKET LBRACE funcBody RBRACE returnType SEMICOLON;
 
 formal_parameter_list ::= | functionParamsList;
 
@@ -139,11 +161,13 @@ returnType ::= | COLON type;
 
 //globalVarDef ::= IDENTIFIER COLON type EQUALITY expr SEMICOLON;
 
-main ::= MAIN LBRACE body RBRACE;
+main ::= MAIN LBRACE funcBody RBRACE;
 
-body ::= statementDecs | localVarDecs statementDecs;
+funcBody ::= localVarDecs statementDecs | statementDecs;
 
 localVarDecs ::= variableDef localVarDecs;
+
+
 
 variableDef ::= IDENTIFIER COLON type EQUALITY expr SEMICOLON;
 
@@ -163,19 +187,21 @@ paramsListOptions ::= | paramsList;
 
 paramsList ::= expr | expr COMMA paramsList;
 
-ifStatement ::= IF LBRACKET expr RBRACKET THEN body optionalElse FI;
+ifStatement ::= IF LBRACKET expr RBRACKET THEN funcBody optionalElse FI;
 
 optionalElse ::= | elseStatement;
 
-elseStatement ::= ELSE body;
+elseStatement ::= ELSE funcBody;
 
-whileLoopStatement ::= WHILE LBRACKET expr RBRACKET DO body OD;
+whileLoopStatement ::= WHILE LBRACKET expr RBRACKET DO funcBody OD;
 
-forAllLoopStatement ::= FORALL LBRACKET IDENTIFIER IN iterable RBRACKET DO body OD;
+forAllLoopStatement ::= FORALL LBRACKET IDENTIFIER IN iterable RBRACKET DO funcBody OD;
 
-iterable ::= dict | seq;
+iterable ::= dict_constant | seq_constant;
 
-dict ::= LBRACE dictListOptions RBRACE;
+dict_constant ::= LBRACE dictListOptions RBRACE;
+
+seq_constant ::= LSQUAREBRACKET paramsListOptions RSQUAREBRACKET;
 
 dictListOptions ::= | dictList;
 
@@ -185,12 +211,12 @@ returnStatement ::= RETURN expr SEMICOLON | RETURN SEMICOLON;
 
 //maybe should be updated to allow assigning value to index, and not to allow assigning value to an arry index returned from function
 
-assignment ::= IDENTIFIER EQUALITY expr; 
+assignment ::= IDENTIFIER EQUALITY expr SEMICOLON | IDENTIFIER LSQUAREBRACKET expr RSQUAREBRACKET EQUALITY expr SEMICOLON; 
 
 expr ::= expr AMPERSANDAMPERSAND expr 
 		| expr PIPEPIPE expr
 		| EXCLAMATION expr
-		| MINUS expr
+		| MINUS expr %prec NEGATIVESIGN /*check what this does*/
 		| expr PLUS expr
         | expr MINUS expr
         | expr CARAT expr
@@ -203,21 +229,20 @@ expr ::= expr AMPERSANDAMPERSAND expr
         | expr EXCLAMATIONEQUALITY expr
         | expr IMPLICATION expr
         | expr COLONCOLON expr
-        | INT
-        | FLOAT
-        | BOOL
-        | STRING
-        | CHAR
-        | RAT
-        | seq
-        | dict
+        | INT_CONSTANT
+        | FLOAT_CONSTANT
+        | BOOL_CONSTANT
+        | STRING_CONSTANT
+        | CHAR_CONSTANT
+        | RAT_CONSTANT
+        | seq_constant
+        | dict_constant
         | LBRACKET expr RBRACKET
         | lenExpr
         | expr IN expr
         | other
         ;
 
-seq ::= LSQUAREBRACKET paramsListOptions RSQUAREBRACKET;
 
 
 lenExpr ::= LEN LBRACKET expr RBRACKET;
