@@ -90,7 +90,7 @@ terminal Boolean BOOL_CONSTANT;
 terminal Float FLOAT_CONSTANT; 
 terminal Integer INT_CONSTANT;
 
-non terminal list, commaSeparatedList, inhabitedCommaSeparatedList, tdef, seq, inhabitedCommaSeparatedIdentifierKeyList, dict, commaSeparatedKeyList, inhabitedCommaSeparatedKeyList, varDeclaration, varSpec, funDeclaration, commaSeparatedVarSpecList, inhabitedCommaSeparatedVarSpecList, variable, varAssignment, statement, block, sequenceSlice, sequenceAccess, expr;
+non terminal list, commaSeparatedList, inhabitedCommaSeparatedList, tdef, seq, inhabitedCommaSeparatedIdentifierKeyList, dict, commaSeparatedKeyList, inhabitedCommaSeparatedKeyList, varDeclaration, varSpec, funDeclaration, commaSeparatedVarSpecList, inhabitedCommaSeparatedVarSpecList, variable, varAssignment, statement, block, sequenceSlice, sequenceAccess, expr, type;
 
 precedence left PIPEPIPE, AMPERSANDAMPERSAND, IMPLICATION;
 precedence left EQUALITYEQUALITY, LTHAN, MTHAN, LTHANEQUALITY, EXCLAMATIONEQUALITY;
@@ -103,26 +103,167 @@ precedence left LBRACKET, RBRACKET;
 
 
 
-program ::= listdeclaration main declarations;
+program ::= listdeclaration main listdeclaration;
 
 listdeclaration ::= | declaration listdeclaration;
 
-declaration ::= functionDef | globalVar | dataType | alias;
+declaration ::= functionDef | globalVarDef | dataTypeDef | aliasDef;
 
-dataType ::= TDEF IDENTIFIER LBRACE dataTypeDeclarationList RBRACE SEMICOLON;
+dataTypeDef ::= TDEF IDENTIFIER LBRACE dataTypeDeclarationList RBRACE SEMICOLON;
 
 dataTypeDeclarationList ::= | dataTypeDeclaration;
 
 dataTypeDeclaration ::= IDENTIFIER COLON type | IDENTIFIER COLON type COMMA dataTypeDeclaration;
 
+type ::= IDENTIFIER | primitiveDataType | aggregateDataType; 
 
+primitiveDataType ::= BOOL | INT | RAT | FLOAT | CHAR;
+
+aggregateDataType ::= sequenceType | dictType;
+
+sequenceType ::= SEQ LTHAN typeseqdict MTHAN;
+
+typeseqdict ::= type | TOP;
+
+dictType ::= DICT LTHAN typeseqdict COMMA typeseqdict MTHAN;
+
+aliasDef ::= ALIAS type IDENTIFIER SEMICOLON;
+
+functionDef ::= FDEF IDENTIFIER LBRACKET formal_parameter_list RBRACKET LBRACE body RBRACE returnType SEMICOLON;
+
+formal_parameter_list ::= | functionParamsList;
+
+functionParamsList ::= IDENTIFIER COLON type | IDENTIFIER COLON type COMMA functionParamsList;
+
+returnType ::= | COLON type;
+
+globalVarDef ::= IDENTIFIER COLON type EQUALITY expr SEMICOLON;
+
+main ::= MAIN LBRACE body RBRACE;
+
+body ::= localVarDecs statementDecs;
+
+localVarDecs ::= | variableDef localVarDecs;
+
+variableDef ::= IDENTIFIER COLON type EQUALITY expr SEMICOLON;
+
+statementDecs ::= statement | statement statementDecs;
+
+statement ::= readStatement | printStatement | functionCallStatement | ifStatement | whileLoopStatement | forAllLoopStatement | returnStatement | assignment;
+
+readStatement ::= READ IDENTIFIER SEMICOLON;
+
+printStatement ::= PRINT expr SEMICOLON;
+
+functionCallStatement ::= functionCallExpr SEMICOLON; 
+
+functionCallExpr ::= IDENTIFIER LBRACKET paramsListOptions RBRACKET;
+
+paramsListOptions ::= | paramsList;
+
+paramsList ::= expr | expr COMMA paramsList;
+
+ifStatement ::= IF LBRACKET expr RBRACKET THEN body optionalElse FI;
+
+optionalElse ::= | elseStatement;
+
+elseStatement ::= ELSE body;
+
+whileLoopStatement ::= WHILE LBRACKET expr RBRACKET DO body OD;
+
+forAllLoopStatement ::= FORALL LBRACKET IDENTIFIER IN iterable RBRACKET DO body OD;
+
+iterable ::= dict | seq;
+
+dict ::= LBRACE dictListOptions RBRACE;
+
+dictListOptions ::= | dictList;
+
+dictList ::= expr COLON expr | expr COLON expr COMMA dictList;
+
+returnStatement ::= RETURN expr SEMICOLON | RETURN SEMICOLON;
+
+assignment := IDENTIFIER EQUALITY expr; //maybe should be updated to allow assigning value to index, and not to allow assigning value to an arry index returned from function
+
+expr ::= expr AND expr 
+		| expr OR expr
+		| NOT expr
+		| MINUS expr
+		| expr PLUS expr
+        | expr MINUS expr
+        | expr CARAT expr
+        | expr FSLASH expr
+        | expr ASTERISK expr
+        | expr LTHAN expr
+        | expr LTHANEQUALITY expr
+        | expr MTHAN expr
+        | expr EQUALITYEQALITY expr
+        | expr EXCLAMATIONEQUALITY expr
+        | expr IMPLICATION expr
+        | expr COLONCOLON expr
+        | INT
+        | FLOAT
+        | BOOL
+        | STRING
+        | CHAR
+        | RAT
+        | seq
+        | dict
+        | LBRACKET expr RBRACKET
+        | lenExpr
+        | expr IN expr
+        | other
+        ;
+
+seq ::= LSQUAREBRACKET paramsListOptions RSQUAREBRACKET;
+
+
+lenExpr ::= LEN LBRACKET expr RBRACKET;
+
+other ::= functionCallExpr | IDENTIFIER | valueOfIndex | substrValue | IDENTIFIER DOT IDENTIFIER | functionCallExpr DOT IDENTIFIER;
+
+index ::= LSQUAREBRACKET expr RSQUAREBRACKET;
+
+valueOfIndex ::= IDENTIFIER index | functionCallExpr index | LBRACKET expr RBRACKET index;
+
+substr ::= LSQUAREBRACKET expr COLON expr LSQUAREBRACKET | LSQUAREBRACKET expr COLON LSQUAREBRACKET | LSQUAREBRACKET COLON expr LSQUAREBRACKET;
+
+substrValue ::= IDENTIFIER substr | functionCallExpr substr | LBRACKET expr RBRACKET substr;
+
+
+
+//seq::= IDENTIFIER COLON SEQ LTHAN typeseqdict MTHAN EQUALITY LSQUAREBRACKET commaseparatedlist RSQUAREBRACKET SEMICOLON;
+
+/*commaseparatedlist ::= | commaseparated;
+
+commaseparated ::= expr | expr COMMA commaseparated;
+
+dict::= IDENTIFIER COLON DICT LTHAN typeseqdict COMMA typeseqdict MTHAN EQUALITY LBRACE dictcontents RBRACE SEMICOLON;
+
+dictcontents ::= | dictcontentsexpr;
+
+dictcontentsexpr ::= expr | expr COMMA dictcontentsexpr;
+
+
+lenOperator ::= LEN LBRACKET expr RBRACKET;
+indexOperator ::= IDENTIFIER LSQUAREBRACKET expr RSQUAREBRACKET;
+
+seqSlice ::= IDENTIFIER LSQUAREBRACKET expr COLON expr RSQUAREBRACKET | IDENTIFIER LSQUAREBRACKET COLON expr RSQUAREBRACKET | IDENTIFIER LSQUAREBRACKET expr COLON RSQUAREBRACKET;
+
+
+
+
+formal_parameter_list::=
+
+
+*/
 
 
 
 
 //all code underneath this is from last years cw
 
-
+/*
 
 block ::= statement block | | error block ;
 
@@ -157,4 +298,4 @@ commaSeparatedVarSpecList ::= | inhabitedCommaSeparatedVarSpecList;
 inhabitedCommaSeparatedVarSpecList ::= varSpec COMMA  inhabitedCommaSeparatedVarSpecList | varSpec;
 
 seq ::= LBRACKET commaSeparatedList RBRACKET;
-
+*/
