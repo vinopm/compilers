@@ -141,9 +141,9 @@ returnType ::= | COLON type;
 
 main ::= MAIN LBRACE body RBRACE;
 
-body ::= localVarDecs statementDecs;
+body ::= statementDecs | localVarDecs statementDecs;
 
-localVarDecs ::= | variableDef localVarDecs;
+localVarDecs ::= variableDef localVarDecs;
 
 variableDef ::= IDENTIFIER COLON type EQUALITY expr SEMICOLON;
 
