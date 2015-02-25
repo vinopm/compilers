@@ -112,7 +112,7 @@ terminal Boolean BOOL_CONSTANT;
 terminal Float FLOAT_CONSTANT; 
 terminal Integer INT_CONSTANT;
 
-non terminal seq_constant, dict_constant, statement, expr, type, listdeclaration, main, program, declaration, functionDef, dataTypeDef, aliasDef, dataTypeDeclarationList, dataTypeDeclaration, primitiveDataType, aggregateDataType, sequenceType, dictType, typeseqdict, formal_parameter_list, funcBody, returnType, functionParamsList, localVarDecs, statementDecs, variableDef, readStatement, printStatement, functionCallStatement, ifStatement, whileLoopStatement, forAllLoopStatement, returnStatement, assignment, functionCallExpr, paramsListOptions, paramsList, optionalElse, elseStatement, iterable, dictListOptions, dictList, lenExpr, other, valueOfIndex, substrValue, index, substr;
+non terminal seq_constant, dict_constant, statement, expr, type, listdeclaration, main, program, declaration, functionDef, dataTypeDef, aliasDef, dataTypeDeclarationList, dataTypeDeclaration, primitiveDataType, aggregateDataType, sequenceType, dictType, typeseqdict, formal_parameter_list, funcBody, returnType, functionParamsList, localVarDecs, statementDecs, variableDef, readStatement, printStatement, functionCallStatement, ifStatement, whileLoopStatement, forAllLoopStatement, returnStatement, assignment, functionCallExpr, paramsListOptions, paramsList, optionalElse, elseStatement, iterable, dictListOptions, dictList, lenExpr, other, valueOfIndex, substrValue, index, substr, body_declaration_list_opt, statements_list_opt, body_declaration, statements_list;
 
 precedence left PIPEPIPE, AMPERSANDAMPERSAND, IMPLICATION;
 precedence left EQUALITYEQUALITY, LTHAN, MTHAN, LTHANEQUALITY, EXCLAMATIONEQUALITY;
@@ -163,15 +163,28 @@ returnType ::= | COLON type;
 
 main ::= MAIN LBRACE funcBody RBRACE;
 
-funcBody ::= localVarDecs statementDecs | statementDecs;
+funcBody ::= body_declaration_list_opt statements_list_opt;
 
-localVarDecs ::= variableDef localVarDecs;
+body_declaration_list_opt ::= | body_declaration body_declaration_list_opt;
+
+body_declaration ::= variableDef | aliasDef | dataTypeDef;
 
 
+
+
+
+statements_list_opt ::= | statements_list;
+
+statements_list ::= statement | statement statements_list;
+
+
+//localVarDecs ::=  | variableDef localVarDecs;
+
+// 1 or more localvariables | 1 or more sequences
 
 variableDef ::= IDENTIFIER COLON type EQUALITY expr SEMICOLON;
 
-statementDecs ::= statement | statement statementDecs;
+//statementDecs ::= | statement statementDecs;
 
 statement ::= readStatement | printStatement | functionCallStatement | ifStatement | whileLoopStatement | forAllLoopStatement | returnStatement | assignment;
 
