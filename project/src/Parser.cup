@@ -90,7 +90,7 @@ terminal Boolean BOOL_CONSTANT;
 terminal Float FLOAT_CONSTANT; 
 terminal Integer INT_CONSTANT;
 
-non terminal list, commaSeparatedList, inhabitedCommaSeparatedList, tdef, seq, inhabitedCommaSeparatedIdentifierKeyList, dict, commaSeparatedKeyList, inhabitedCommaSeparatedKeyList, varDeclaration, varSpec, funDeclaration, commaSeparatedVarSpecList, inhabitedCommaSeparatedVarSpecList, variable, varAssignment, statement, block, sequenceSlice, sequenceAccess, expr, type;
+non terminal list, commaSeparatedList, inhabitedCommaSeparatedList, tdef, seq, inhabitedCommaSeparatedIdentifierKeyList, dict, commaSeparatedKeyList, inhabitedCommaSeparatedKeyList, varDeclaration, varSpec, funDeclaration, commaSeparatedVarSpecList, inhabitedCommaSeparatedVarSpecList, variable, varAssignment, statement, block, sequenceSlice, sequenceAccess, expr, type, listdeclaration, main, program, declaration, functionDef, globalVarDef, dataTypeDef, aliasDef, dataTypeDeclarationList, dataTypeDeclaration, primitiveDataType, aggregateDataType, sequenceType, dictType, typeseqdict, formal_parameter_list, body, returnType, functionParamsList, localVarDecs, statementDecs, variableDef, readStatement, printStatement, functionCallStatement, ifStatement, whileLoopStatement, forAllLoopStatement, returnStatement, assignment, functionCallExpr, paramsListOptions, paramsList, optionalElse, elseStatement, iterable, dictListOptions, dictList, lenExpr, other, valueOfIndex, substrValue, index, substr;
 
 precedence left PIPEPIPE, AMPERSANDAMPERSAND, IMPLICATION;
 precedence left EQUALITYEQUALITY, LTHAN, MTHAN, LTHANEQUALITY, EXCLAMATIONEQUALITY;
@@ -183,11 +183,13 @@ dictList ::= expr COLON expr | expr COLON expr COMMA dictList;
 
 returnStatement ::= RETURN expr SEMICOLON | RETURN SEMICOLON;
 
-assignment := IDENTIFIER EQUALITY expr; //maybe should be updated to allow assigning value to index, and not to allow assigning value to an arry index returned from function
+//maybe should be updated to allow assigning value to index, and not to allow assigning value to an arry index returned from function
 
-expr ::= expr AND expr 
-		| expr OR expr
-		| NOT expr
+assignment ::= IDENTIFIER EQUALITY expr; 
+
+expr ::= expr AMPERSANDAMPERSAND expr 
+		| expr PIPEPIPE expr
+		| EXCLAMATION expr
 		| MINUS expr
 		| expr PLUS expr
         | expr MINUS expr
@@ -197,7 +199,7 @@ expr ::= expr AND expr
         | expr LTHAN expr
         | expr LTHANEQUALITY expr
         | expr MTHAN expr
-        | expr EQUALITYEQALITY expr
+        | expr EQUALITYEQUALITY expr
         | expr EXCLAMATIONEQUALITY expr
         | expr IMPLICATION expr
         | expr COLONCOLON expr
@@ -250,10 +252,6 @@ indexOperator ::= IDENTIFIER LSQUAREBRACKET expr RSQUAREBRACKET;
 
 seqSlice ::= IDENTIFIER LSQUAREBRACKET expr COLON expr RSQUAREBRACKET | IDENTIFIER LSQUAREBRACKET COLON expr RSQUAREBRACKET | IDENTIFIER LSQUAREBRACKET expr COLON RSQUAREBRACKET;
 
-
-
-
-formal_parameter_list::=
 
 
 */
