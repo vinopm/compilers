@@ -118,7 +118,7 @@ precedence left PLUS, MINUS;
 precedence left IN, COLONCOLON;
 precedence left ASTERISK, FSLASH;
 precedence left CARAT;
-precedence left EXCLAMATION, NEGATIVESIGN;
+precedence left EXCLAMATION, NEGATIVESIGN, EQUALITY;
 precedence left LBRACKET, RBRACKET, COLON;
 
 
@@ -168,13 +168,13 @@ returnType ::= | COLON type;
 
 main ::= MAIN LBRACE funcBody RBRACE;
 
-//funcBody ::= localVarDecs statementDecs | statementDecs;
+//funcBody ::= localVarDecs | statementDecs | localVarDecs statementDecs;
 
-funcBody ::= localVarDecs | statementDecs | localVarDecs statementDecs;
+funcBody ::= localVarDecs | statementDecs | localVarDecs statementDecs; //declaration statementDecs;
 
 //localVarDecs ::= variableDef localVarDecs;
 
-localVarDecs ::= declaration | declaration localVarDecs;
+localVarDecs ::= localVarDecs declaration | declaration; // localVarDecs | declaration;
 
 //localVarDecs ::= variableDef | variableDef localVarDecs;
 
@@ -182,7 +182,7 @@ variableDef ::= IDENTIFIER COLON type EQUALITY expr SEMICOLON | IDENTIFIER COLON
 
 //expr1 ::= expr | typeDef;
 
-statementDecs ::= statement | statement statementDecs;
+statementDecs ::= statement | statementDecs statement;
 
 statement ::= readStatement | printStatement | functionCallStatement | ifStatement | whileLoopStatement | forAllLoopStatement | returnStatement | assignment;
 

@@ -43,7 +43,7 @@ Identifier = [a-zA-Z][a-zA-Z0-9_]*
 //Int = 0 | [-]? [1-9] [0-9]*
 Int = 0 | [1-9] [0-9]*
 String = "\"" ~"\""
-Rat = {Int}_{Int} "/" {Int}
+Rat = {Int}_ "-"* {Int} "/" "-"* {Int}
 Float = {Int} "." [0-9]+ 
 Char = \'[ -~]\'
 
