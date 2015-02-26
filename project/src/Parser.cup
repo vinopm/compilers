@@ -208,7 +208,7 @@ whileLoopStatement ::= WHILE LBRACKET expr RBRACKET DO funcBody OD;
 
 forAllLoopStatement ::= FORALL LBRACKET IDENTIFIER IN iterable RBRACKET DO funcBody OD;
 
-iterable ::= dict_constant | seq_constant;
+iterable ::= dict_constant | seq_constant | IDENTIFIER;
 
 dict_constant ::= LBRACE dictListOptions RBRACE;
 
