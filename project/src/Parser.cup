@@ -110,7 +110,7 @@ terminal Boolean BOOL_CONSTANT;
 terminal Float FLOAT_CONSTANT; 
 terminal Integer INT_CONSTANT;
 
-non terminal seq_constant, dict_constant, statement, expr, type, listdeclaration, main, program, declaration, functionDef, dataTypeDef, aliasDef, dataTypeDeclarationList, dataTypeDeclaration, primitiveDataType, aggregateDataType, sequenceType, dictType, typeseqdict, formal_parameter_list, funcBody, returnType, functionParamsList, localVarDecs, statementDecs, variableDef, readStatement, printStatement, functionCallStatement, ifStatement, whileLoopStatement, forAllLoopStatement, returnStatement, assignment, functionCallExpr, paramsListOptions, paramsList, optionalElse, elseStatement, iterable, dictListOptions, dictList, lenExpr, other, valueOfIndex, substrValue, index, substr, typeDef, commaList, commaListSeparated;
+non terminal seq_constant, dict_constant, statement, expr, type, listdeclaration, main, program, declaration, functionDef, dataTypeDef, aliasDef, dataTypeDeclarationList, dataTypeDeclaration, primitiveDataType, aggregateDataType, sequenceType, dictType, typeseqdict, formal_parameter_list, funcBody, returnType, functionParamsList, localVarDecs, statementDecs, variableDef, readStatement, printStatement, functionCallStatement, ifStatement, whileLoopStatement, forAllLoopStatement, returnStatement, assignment, functionCallExpr, paramsListOptions, paramsList, optionalElse, elseStatement, iterable, dictListOptions, dictList, lenExpr, other, valueOfIndex, substrValue, index, substr, typeDef, commaListSeparated;
 
 precedence left PIPEPIPE, AMPERSANDAMPERSAND, IMPLICATION, IDENTIFIER;
 precedence left EQUALITYEQUALITY, LTHAN, MTHAN, LTHANEQUALITY, EXCLAMATIONEQUALITY;
@@ -178,7 +178,7 @@ localVarDecs ::= declaration | declaration localVarDecs;
 
 //localVarDecs ::= variableDef | variableDef localVarDecs;
 
-variableDef ::= IDENTIFIER COLON type EQUALITY expr SEMICOLON | IDENTIFIER COLON type SEMICOLON | IDENTIFIER DOT type EQUALITY 
+variableDef ::= IDENTIFIER COLON type EQUALITY expr SEMICOLON | IDENTIFIER COLON type SEMICOLON | IDENTIFIER DOT type EQUALITY expr SEMICOLON | IDENTIFIER DOT type;
 
 //expr1 ::= expr | typeDef;
 
@@ -252,7 +252,6 @@ expr ::= expr AMPERSANDAMPERSAND expr
         | seq_constant
         | dict_constant
         | LBRACKET expr RBRACKET
-        | LSQUAREBRACKET expr RSQUAREBRACKET
         | lenExpr
         | expr IN expr
         | other
