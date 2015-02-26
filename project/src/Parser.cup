@@ -71,27 +71,26 @@ parser code {:
 		 case 39 : System.out.print( "UNEXPECTED IN"); break;
 		 case 40 : System.out.print( "UNEXPECTED BOOL"); break;
 		 case 41 : System.out.print( "UNEXPECTED INT"); break;
-		 case 42 : System.out.print( "UNEXPECTED STRING"); break;
-		 case 43 : System.out.print( "UNEXPECTED RAT"); break;
-		 case 44 : System.out.print( "UNEXPECTED FLOAT"); break;
-		 case 45 : System.out.print( "UNEXPECTED CHAR"); break;
-		 case 46 : System.out.print( "UNEXPECTED TOP"); break;
-		 case 47 : System.out.print( "UNEXPECTED LEN"); break;
-		 case 48 : System.out.print( "UNEXPECTED SEQ"); break;
-		 case 49 : System.out.print( "UNEXPECTED THEN"); break;
-		 case 50 : System.out.print( "UNEXPECTED DICT"); break;
-		 case 51 : System.out.print( "UNEXPECTED MAIN"); break;
-		 case 52 : System.out.print( "UNEXPECTED ALIAS"); break;
+		 case 42 : System.out.print( "UNEXPECTED RAT"); break;
+		 case 43 : System.out.print( "UNEXPECTED FLOAT"); break;
+		 case 44 : System.out.print( "UNEXPECTED CHAR"); break;
+		 case 45 : System.out.print( "UNEXPECTED TOP"); break;
+		 case 46 : System.out.print( "UNEXPECTED LEN"); break;
+		 case 47 : System.out.print( "UNEXPECTED SEQ"); break;
+		 case 48 : System.out.print( "UNEXPECTED THEN"); break;
+		 case 49 : System.out.print( "UNEXPECTED DICT"); break;
+		 case 50 : System.out.print( "UNEXPECTED MAIN"); break;
+		 case 51 : System.out.print( "UNEXPECTED FORALL"); break;
 
-		 case 53 : System.out.print( "UNEXPECTED FORALL"); break;
-		 case 54 : System.out.print( "UNEXPECTED NEGATIVESIGN"); break;
-		 case 55 : System.out.print( "UNEXPECTED STRING_CONSTANT"); break;
-		 case 56 : System.out.print( "UNEXPECTED RAT_CONSTANT");break;
-		 case 57 : System.out.print( "UNEXPECTED IDENTIFIER"); break;
-		 case 58 : System.out.print( "UNEXPECTED CHAR_CONSTANT"); break;
-		 case 59 : System.out.print( "UNEXPECTED BOOL_CONSTANT"); break;
-		 case 60 : System.out.print( "UNEXPECTED FLOAT_CONSTANT"); break;
-		 case 61 : System.out.print( "UNEXPECTED INT_CONSTANT"); break;
+		 case 52 : System.out.print( "UNEXPECTED FORALL"); break;
+		 case 53 : System.out.print( "UNEXPECTED NEGATIVESIGN"); break;
+		 case 54 : System.out.print( "UNEXPECTED STRING_CONSTANT"); break;
+		 case 55 : System.out.print( "UNEXPECTED RAT_CONSTANT");break;
+		 case 56 : System.out.print( "UNEXPECTED IDENTIFIER"); break;
+		 case 57 : System.out.print( "UNEXPECTED CHAR_CONSTANT"); break;
+		 case 58 : System.out.print( "UNEXPECTED BOOL_CONSTANT"); break;
+		 case 59 : System.out.print( "UNEXPECTED FLOAT_CONSTANT"); break;
+		 case 60 : System.out.print( "UNEXPECTED INT_CONSTANT"); break;
 		 default : System.out.print( "MISSED THE CASES"); break;
          }
          System.out.println(".");
@@ -114,14 +113,14 @@ terminal Integer INT_CONSTANT;
 
 non terminal seq_constant, dict_constant, statement, expr, type, listdeclaration, main, program, declaration, functionDef, dataTypeDef, aliasDef, dataTypeDeclarationList, dataTypeDeclaration, primitiveDataType, aggregateDataType, sequenceType, dictType, typeseqdict, formal_parameter_list, funcBody, returnType, functionParamsList, localVarDecs, statementDecs, variableDef, readStatement, printStatement, functionCallStatement, ifStatement, whileLoopStatement, forAllLoopStatement, returnStatement, assignment, functionCallExpr, paramsListOptions, paramsList, optionalElse, elseStatement, iterable, dictListOptions, dictList, lenExpr, other, valueOfIndex, substrValue, index, substr;
 
-precedence left PIPEPIPE, AMPERSANDAMPERSAND, IMPLICATION;
+precedence left PIPEPIPE, AMPERSANDAMPERSAND, IMPLICATION, IDENTIFIER;
 precedence left EQUALITYEQUALITY, LTHAN, MTHAN, LTHANEQUALITY, EXCLAMATIONEQUALITY;
 precedence left PLUS, MINUS;
 precedence left IN, COLONCOLON;
 precedence left ASTERISK, FSLASH;
 precedence left CARAT;
 precedence left EXCLAMATION, NEGATIVESIGN;
-precedence left LBRACKET, RBRACKET;
+precedence left LBRACKET, RBRACKET, COLON;
 
 
 
@@ -163,11 +162,13 @@ returnType ::= | COLON type;
 
 main ::= MAIN LBRACE funcBody RBRACE;
 
-funcBody ::= localVarDecs statementDecs | statementDecs;
+//funcBody ::= localVarDecs statementDecs | statementDecs;
 
-localVarDecs ::= variableDef localVarDecs;
+funcBody ::= localVarDecs | statementDecs | localVarDecs statementDecs;
 
+//localVarDecs ::= variableDef localVarDecs;
 
+localVarDecs ::= variableDef | variableDef localVarDecs;
 
 variableDef ::= IDENTIFIER COLON type EQUALITY expr SEMICOLON;
 
