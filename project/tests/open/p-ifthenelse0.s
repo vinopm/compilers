@@ -4,7 +4,7 @@ fdef foo( pos : int ) {
 	else 
 		return 1;
 	fi	
-	return foo(pos-1) + foo(pos-2);
+	return foo(pos+1) + foo(1-2);
 } ;
 
 main {
