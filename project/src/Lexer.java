@@ -712,235 +712,235 @@ class Lexer implements java_cup.runtime.Scanner {
           }
         case 62: break;
         case 3: 
-          { System.out.printf("/ "); return symbol(sym.FSLASH);
+          { return symbol(sym.FSLASH);
           }
         case 63: break;
         case 4: 
-          { System.out.printf(yytext() + " "); return symbol(sym.BOOL_CONSTANT, new Boolean("T".equals(yytext())));
+          { return symbol(sym.BOOL_CONSTANT, new Boolean("T".equals(yytext())));
           }
         case 64: break;
         case 5: 
-          { System.out.printf(yytext() + " "); return symbol(sym.IDENTIFIER, yytext());
+          { return symbol(sym.IDENTIFIER, yytext());
           }
         case 65: break;
         case 6: 
-          { System.out.printf(yytext() + " "); return symbol(sym.INT_CONSTANT, new Integer(yytext()));
+          { return symbol(sym.INT_CONSTANT, new Integer(yytext()));
           }
         case 66: break;
         case 7: 
-          { System.out.printf("- "); return symbol(sym.MINUS);
+          { return symbol(sym.MINUS);
           }
         case 67: break;
         case 8: 
-          { System.out.printf(". "); return symbol(sym.DOT);
+          { return symbol(sym.DOT);
           }
         case 68: break;
         case 9: 
-          { System.out.printf("! "); return symbol(sym.EXCLAMATION);
+          { return symbol(sym.EXCLAMATION);
           }
         case 69: break;
         case 10: 
-          { System.out.printf("+ "); return symbol(sym.PLUS);
+          { return symbol(sym.PLUS);
           }
         case 70: break;
         case 11: 
-          { System.out.printf("* "); return symbol(sym.ASTERISK);
+          { return symbol(sym.ASTERISK);
           }
         case 71: break;
         case 12: 
-          { System.out.printf("^ "); return symbol(sym.CARAT);
+          { return symbol(sym.CARAT);
           }
         case 72: break;
         case 13: 
-          { System.out.printf("[ "); return symbol(sym.LSQUAREBRACKET);
+          { return symbol(sym.LSQUAREBRACKET);
           }
         case 73: break;
         case 14: 
-          { System.out.printf("] "); return symbol(sym.RSQUAREBRACKET);
+          { return symbol(sym.RSQUAREBRACKET);
           }
         case 74: break;
         case 15: 
-          { System.out.printf("( "); return symbol(sym.LBRACKET);
+          { return symbol(sym.LBRACKET);
           }
         case 75: break;
         case 16: 
-          { System.out.printf(") "); return symbol(sym.RBRACKET);
+          { return symbol(sym.RBRACKET);
           }
         case 76: break;
         case 17: 
-          { System.out.printf(": "); return symbol(sym.COLON);
+          { return symbol(sym.COLON);
           }
         case 77: break;
         case 18: 
-          { System.out.printf("< "); return symbol(sym.LTHAN);
+          { return symbol(sym.LTHAN);
           }
         case 78: break;
         case 19: 
-          { System.out.printf("> "); return symbol(sym.MTHAN);
+          { return symbol(sym.MTHAN);
           }
         case 79: break;
         case 20: 
-          { System.out.printf("= "); return symbol(sym.EQUALITYEQUALITY);
+          { return symbol(sym.EQUALITYEQUALITY);
           }
         case 80: break;
         case 21: 
-          { System.out.printf("; "); return symbol(sym.SEMICOLON);
+          { return symbol(sym.SEMICOLON);
           }
         case 81: break;
         case 22: 
-          { System.out.printf("{ "); return symbol(sym.LBRACE);
+          { return symbol(sym.LBRACE);
           }
         case 82: break;
         case 23: 
-          { System.out.printf("} "); return symbol(sym.RBRACE);
+          { return symbol(sym.RBRACE);
           }
         case 83: break;
         case 24: 
-          { System.out.printf(", "); return symbol(sym.COMMA);
+          { return symbol(sym.COMMA);
           }
         case 84: break;
         case 25: 
-          { System.out.printf(yytext() + " "); return symbol(sym.STRING_CONSTANT, yytext().substring(1, yytext().length()-1));
+          { return symbol(sym.STRING_CONSTANT, yytext().substring(1, yytext().length()-1));
           }
         case 85: break;
         case 26: 
-          { System.out.printf("!= "); return symbol(sym.EXCLAMATIONEQUALITY);
+          { return symbol(sym.EXCLAMATIONEQUALITY);
           }
         case 86: break;
         case 27: 
-          { System.out.printf("&& "); return symbol(sym.AMPERSANDAMPERSAND);
+          { return symbol(sym.AMPERSANDAMPERSAND);
           }
         case 87: break;
         case 28: 
-          { System.out.printf(":: "); return symbol(sym.COLONCOLON);
+          { return symbol(sym.COLONCOLON);
           }
         case 88: break;
         case 29: 
-          { System.out.printf(":= "); return symbol(sym.EQUALITY);
+          { return symbol(sym.EQUALITY);
           }
         case 89: break;
         case 30: 
-          { System.out.printf("<= "); return symbol(sym.LTHANEQUALITY);
+          { return symbol(sym.LTHANEQUALITY);
           }
         case 90: break;
         case 31: 
-          { System.out.printf("|| "); return symbol(sym.PIPEPIPE);
+          { return symbol(sym.PIPEPIPE);
           }
         case 91: break;
         case 32: 
-          { System.out.printf("=> "); return symbol(sym.IMPLICATION);
+          { return symbol(sym.IMPLICATION);
           }
         case 92: break;
         case 33: 
-          { System.out.printf("do "); return symbol(sym.DO);
+          { return symbol(sym.DO);
           }
         case 93: break;
         case 34: 
-          { System.out.printf("fi "); return symbol(sym.FI);
+          { return symbol(sym.FI);
           }
         case 94: break;
         case 35: 
-          { System.out.printf("if "); return symbol(sym.IF);
+          { return symbol(sym.IF);
           }
         case 95: break;
         case 36: 
-          { System.out.printf("in "); return symbol(sym.IN);
+          { return symbol(sym.IN);
           }
         case 96: break;
         case 37: 
-          { System.out.printf("od "); return symbol(sym.OD);
+          { return symbol(sym.OD);
           }
         case 97: break;
         case 38: 
-          { System.out.printf(yytext() + " "); return symbol(sym.FLOAT_CONSTANT, new Float(yytext()));
+          { return symbol(sym.FLOAT_CONSTANT, new Float(yytext()));
           }
         case 98: break;
         case 39: 
-          { System.out.printf(yytext() + " "); return symbol(sym.CHAR_CONSTANT, yytext().substring(1,2));
+          { return symbol(sym.CHAR_CONSTANT, yytext().substring(1,2));
           }
         case 99: break;
         case 40: 
-          { System.out.printf("top "); return symbol(sym.TOP);
+          { return symbol(sym.TOP);
           }
         case 100: break;
         case 41: 
-          { System.out.printf("int "); return symbol(sym.INT);
+          { return symbol(sym.INT);
           }
         case 101: break;
         case 42: 
-          { System.out.printf("len "); return symbol(sym.LEN);
+          { return symbol(sym.LEN);
           }
         case 102: break;
         case 43: 
-          { System.out.printf("rat "); return symbol(sym.RAT);
+          { return symbol(sym.RAT);
           }
         case 103: break;
         case 44: 
-          { System.out.printf("seq "); return symbol(sym.SEQ);
+          { return symbol(sym.SEQ);
           }
         case 104: break;
         case 45: 
-          { System.out.printf("tdef "); return symbol(sym.TDEF);
+          { return symbol(sym.TDEF);
           }
         case 105: break;
         case 46: 
-          { System.out.printf("then "); return symbol(sym.THEN);
+          { return symbol(sym.THEN);
           }
         case 106: break;
         case 47: 
-          { System.out.printf("dict "); return symbol(sym.DICT);
+          { return symbol(sym.DICT);
           }
         case 107: break;
         case 48: 
-          { System.out.printf("else "); return symbol(sym.ELSE);
+          { return symbol(sym.ELSE);
           }
         case 108: break;
         case 49: 
-          { System.out.printf("fdef "); return symbol(sym.FDEF);
+          { return symbol(sym.FDEF);
           }
         case 109: break;
         case 50: 
-          { System.out.printf("read "); return symbol(sym.READ);
+          { return symbol(sym.READ);
           }
         case 110: break;
         case 51: 
-          { System.out.printf("bool "); return symbol(sym.BOOL);
+          { return symbol(sym.BOOL);
           }
         case 111: break;
         case 52: 
-          { System.out.printf("main "); return symbol(sym.MAIN);
+          { return symbol(sym.MAIN);
           }
         case 112: break;
         case 53: 
-          { System.out.printf("char "); return symbol(sym.CHAR);
+          { return symbol(sym.CHAR);
           }
         case 113: break;
         case 54: 
-          { System.out.printf(yytext() + " "); return symbol(sym.RAT_CONSTANT, new String(yytext()));
+          { return symbol(sym.RAT_CONSTANT, new String(yytext()));
           }
         case 114: break;
         case 55: 
-          { System.out.printf("float "); return symbol(sym.FLOAT);
+          { return symbol(sym.FLOAT);
           }
         case 115: break;
         case 56: 
-          { System.out.printf("while "); return symbol(sym.WHILE);
+          { return symbol(sym.WHILE);
           }
         case 116: break;
         case 57: 
-          { System.out.printf("alias "); return symbol(sym.ALIAS);
+          { return symbol(sym.ALIAS);
           }
         case 117: break;
         case 58: 
-          { System.out.printf("print "); return symbol(sym.PRINT);
+          { return symbol(sym.PRINT);
           }
         case 118: break;
         case 59: 
-          { System.out.printf("forall "); return symbol(sym.FORALL);
+          { return symbol(sym.FORALL);
           }
         case 119: break;
         case 60: 
-          { System.out.printf("return "); return symbol(sym.RETURN);
+          { return symbol(sym.RETURN);
           }
         case 120: break;
         default: 

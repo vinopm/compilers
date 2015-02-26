@@ -1,3 +1,4 @@
+
 main {
 	a : seq<int> := [1, 2, 3];
 	forall(n in a) do
