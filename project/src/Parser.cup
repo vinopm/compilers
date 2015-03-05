@@ -4,6 +4,7 @@ import java_cup.runtime.Symbol;
 
 
 /* Preliminaries to use the lexer.  */
+//test
 //scan with {: return scanner.next_token(); :};
 
 
