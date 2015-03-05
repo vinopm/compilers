@@ -4,10 +4,14 @@ fdef foo( pos : int ) {
 	else 
 		return 1;
 	fi	
-	return foo(pos+1) + foo(1-2);
+	return foo(pos-1) + foo(pos-2);
 } ;
 
 main {
 	foo( 13 );
 	return;
-}
+};
+
+fdef add (x:int, y:int) {
+	return x + y;
+} : int;

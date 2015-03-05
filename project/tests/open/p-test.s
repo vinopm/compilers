@@ -22,4 +22,4 @@ b : seq<int> := reverse(a);
 	} : seq<top> ;
 
   return;
-}
+};

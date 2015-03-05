@@ -11,95 +11,13 @@ import java_cup.runtime.Symbol;
 parser code {: 
   public boolean syntaxErrors;
 
-  //Lexer lexer;
 
-  /*public Parser(Lexer lex) {
-      super(lex);
-      lexer = lex;
-  }*/
 
-  
-  public void report_error(String message, Object info) {
-    syntaxErrors = true;
-
-    System.out.print(message + ": ");
-    if (info instanceof Symbol) {
-	    Symbol symbol = (Symbol) info;
-	    
-	    System.out.print("Error in line "+symbol.left+", column "+symbol.right+":  ");
-
-	    switch(symbol.sym) {
-	     case 0 : System.out.print( "EOF" ); break;
-	     case 1 : System.out.print( "error" ); break;
-		 case 2 : System.out.print( "UNEXPECTED EXCLAMATION"); break;
-		 case 3 : System.out.print( "UNEXPECTED AMPERSANDAMPERSAND"); break;
-		 case 4 : System.out.print( "UNEXPECTED MINUS"); break;
-		 case 5 : System.out.print( "UNEXPECTED PLUS"); break;
-		 case 6 : System.out.print( "UNEXPECTED ASTERISK"); break;
-		 case 7 : System.out.print( "UNEXPECTED FSLASH"); break;
-		 case 8 : System.out.print( "UNEXPECTED CARAT"); break;
-		 case 9 : System.out.print( "UNEXPECTED LSQUAREBRACKET"); break;
-		 case 10 : System.out.print( "UNEXPECTED RSQUAREBRACKET"); break;
-		 case 11 : System.out.print( "UNEXPECTED LBRACKET"); break;
-		 case 12 : System.out.print( "UNEXPECTED RBRACKET"); break;
-		 case 13 : System.out.print( "UNEXPECTED COLONCOLON"); break;
-		 case 14 : System.out.print( "UNEXPECTED COLON"); break;
-		 case 15 : System.out.print( "UNEXPECTED LTHAN"); break;
-		 case 16 : System.out.print( "UNEXPECTED MTHAN"); break;
-		 case 17 : System.out.print( "UNEXPECTED PIPEPIPE"); break;
-		 case 18 : System.out.print( "UNEXPECTED LTHANEQUALITY"); break;
-		 case 19 : System.out.print( "UNEXPECTED IMPLICATION"); break;
-		 case 20 : System.out.print( "UNEXPECTED EXCLAMATIONEQUALITY"); break;
-		 case 21 : System.out.print( "UNEXPECTED SEMICOLON"); break;
-		 case 22 : System.out.print( "UNEXPECTED LBRACE"); break;
-		 case 23 : System.out.print( "UNEXPECTED RBRACE"); break;
-		 case 24 : System.out.print( "UNEXPECTED DOT"); break;
-		 case 25 : System.out.print( "UNEXPECTED COMMA"); break;
-		 case 26 : System.out.print( "UNEXPECTED EQUALITY");break;
-		 case 27 : System.out.print( "UNEXPECTED EQUALITYEQUALITY"); break;
-		 case 28 : System.out.print( "UNEXPECTED TDEF"); break;
-		 case 29 : System.out.print( "UNEXPECTED FDEF"); break;
-		 case 30 : System.out.print( "UNEXPECTED WHILE"); break;
-		 case 31 : System.out.print( "UNEXPECTED RETURN"); break;
-		 case 32 : System.out.print( "UNEXPECTED READ"); break;
-		 case 33 : System.out.print( "UNEXPECTED PRINT"); break;
-		 case 34 : System.out.print( "UNEXPECTED IF"); break;
-		 case 35 : System.out.print( "UNEXPECTED ELSE"); break;
-		 case 36 : System.out.print( "UNEXPECTED FI"); break;
-		 case 37 : System.out.print( "UNEXPECTED DO"); break;
-		 case 38 : System.out.print( "UNEXPECTED OD"); break;
-		 case 39 : System.out.print( "UNEXPECTED IN"); break;
-		 case 40 : System.out.print( "UNEXPECTED BOOL"); break;
-		 case 41 : System.out.print( "UNEXPECTED INT"); break;
-		 case 42 : System.out.print( "UNEXPECTED RAT"); break;
-		 case 43 : System.out.print( "UNEXPECTED FLOAT"); break;
-		 case 44 : System.out.print( "UNEXPECTED CHAR"); break;
-		 case 45 : System.out.print( "UNEXPECTED TOP"); break;
-		 case 46 : System.out.print( "UNEXPECTED LEN"); break;
-		 case 47 : System.out.print( "UNEXPECTED SEQ"); break;
-		 case 48 : System.out.print( "UNEXPECTED THEN"); break;
-		 case 49 : System.out.print( "UNEXPECTED DICT"); break;
-		 case 50 : System.out.print( "UNEXPECTED MAIN"); break;
-		 case 51 : System.out.print( "UNEXPECTED ALIAS"); break;
-		 case 52 : System.out.print( "UNEXPECTED FORALL"); break;
-		 case 53 : System.out.print( "UNEXPECTED NEGATIVESIGN"); break;
-		 case 54 : System.out.print( "UNEXPECTED STRING_CONSTANT"); break;
-		 case 55 : System.out.print( "UNEXPECTED RAT_CONSTANT");break;
-		 case 56 : System.out.print( "UNEXPECTED IDENTIFIER"); break;
-		 case 57 : System.out.print( "UNEXPECTED CHAR_CONSTANT"); break;
-		 case 58 : System.out.print( "UNEXPECTED BOOL_CONSTANT"); break;
-		 case 59 : System.out.print( "UNEXPECTED FLOAT_CONSTANT"); break;
-		 case 60 : System.out.print( "UNEXPECTED INT_CONSTANT"); break;
-		 default : System.out.print( "MISSED THE CASES"); break;
-         }
-         System.out.println(".");
-	    
-    }
+  public void syntax_error(Symbol current_token) { report_error(
+    "Syntax error at line " + (current_token.left+1) + ", column "
+	+ current_token.right, null );
   }
 
-  /*public static void main(String args[]) throws Exception {
-    new Parser(new Lexer(new java.io.FileInputStream(args[0]))).parse();
-  }*/
 :}; 
 
 
@@ -166,7 +84,7 @@ returnType ::= | COLON type;
 
 //globalVarDef ::= IDENTIFIER COLON type EQUALITY expr SEMICOLON;
 
-main ::= MAIN LBRACE funcBody RBRACE;
+main ::= MAIN LBRACE funcBody RBRACE SEMICOLON;
 
 //funcBody ::= localVarDecs | statementDecs | localVarDecs statementDecs;
 
@@ -270,69 +188,3 @@ valueOfIndex ::= IDENTIFIER index | functionCallExpr index | LBRACKET expr RBRAC
 substr ::= LSQUAREBRACKET expr COLON expr RSQUAREBRACKET | LSQUAREBRACKET expr COLON RSQUAREBRACKET | LSQUAREBRACKET COLON expr RSQUAREBRACKET;
 
 substrValue ::= IDENTIFIER substr | functionCallExpr substr | LBRACKET expr RBRACKET substr;
-
-
-
-//seq::= IDENTIFIER COLON SEQ LTHAN typeseqdict MTHAN EQUALITY LSQUAREBRACKET commaseparatedlist RSQUAREBRACKET SEMICOLON;
-
-/*commaseparatedlist ::= | commaseparated;
-
-commaseparated ::= expr | expr COMMA commaseparated;
-
-dict::= IDENTIFIER COLON DICT LTHAN typeseqdict COMMA typeseqdict MTHAN EQUALITY LBRACE dictcontents RBRACE SEMICOLON;
-
-dictcontents ::= | dictcontentsexpr;
-
-dictcontentsexpr ::= expr | expr COMMA dictcontentsexpr;
-
-
-lenOperator ::= LEN LBRACKET expr RBRACKET;
-indexOperator ::= IDENTIFIER LSQUAREBRACKET expr RSQUAREBRACKET;
-
-seqSlice ::= IDENTIFIER LSQUAREBRACKET expr COLON expr RSQUAREBRACKET | IDENTIFIER LSQUAREBRACKET COLON expr RSQUAREBRACKET | IDENTIFIER LSQUAREBRACKET expr COLON RSQUAREBRACKET;
-
-
-
-*/
-
-
-
-
-//all code underneath this is from last years cw
-
-/*
-
-block ::= statement block | | error block ;
-
-tdef ::= TDEF IDENTIFIER COLON inhabitedCommaSeparatedIdentifierKeyList ;
-
-inhabitedCommaSeparatedIdentifierKeyList ::= IDENTIFIER COLON expr COMMA inhabitedCommaSeparatedIdentifierKeyList | IDENTIFIER COLON expr;
-
-varDeclaration ::= varSpec EQUALITY expr | varSpec;
-varSpec ::= IDENTIFIER IDENTIFIER;
-
-funDeclaration ::= FDEF IDENTIFIER IDENTIFIER LBRACKET commaSeparatedVarSpecList RBRACKET LBRACE block RBRACE;
-
-variable ::= IDENTIFIER | sequenceAccess | expr DOT IDENTIFIER;
-varAssignment ::= variable EQUALITY expr;
-
-statement ::= varAssignment SEMICOLON | READ variable SEMICOLON | PRINT commaSeparatedList SEMICOLON | RETURN expr SEMICOLON | IF LBRACKET expr RBRACKET LBRACE block RBRACE ELSE LBRACE block RBRACE | WHILE expr DO LBRACE block RBRACE | FOREACH LBRACKET expr COLON IDENTIFIER RBRACKET LBRACE block RBRACE | expr SEMICOLON | varDeclaration SEMICOLON | tdef SEMICOLON | funDeclaration | SEMICOLON;
-
-expr ::= variable | dict | list | expr PLUS expr | expr MINUS expr | expr ASTERISK expr | expr FSLASH expr | expr CARAT expr | STRING_CONSTANT | CHAR_CONSTANT | INT_CONSTANT | FLOAT_CONSTANT | expr IN expr | expr PIPEPIPE expr | expr AMPERSANDAMPERSAND expr | expr LTHAN expr | expr LTHANEQUALITY expr | expr EQUALITYEQUALITY expr | expr EXCLAMATIONEQUALITY expr | expr COLONCOLON expr | EXCLAMATION expr | IDENTIFIER seq | LBRACKET expr RBRACKET | sequenceSlice;
-
-sequenceSlice ::= expr LSQUAREBRACKET expr COLON expr RSQUAREBRACKET;
-sequenceAccess ::= expr LSQUAREBRACKET expr RSQUAREBRACKET;
-
-list ::= LSQUAREBRACKET commaSeparatedList RSQUAREBRACKET;
-commaSeparatedList ::= | inhabitedCommaSeparatedList;
-inhabitedCommaSeparatedList ::= expr COMMA inhabitedCommaSeparatedList | expr;
-
-dict ::= LBRACE commaSeparatedKeyList RBRACE; 
-commaSeparatedKeyList ::= | inhabitedCommaSeparatedKeyList;
-inhabitedCommaSeparatedKeyList ::= expr COLON expr COMMA inhabitedCommaSeparatedKeyList | expr COLON expr;
-
-commaSeparatedVarSpecList ::= | inhabitedCommaSeparatedVarSpecList;
-inhabitedCommaSeparatedVarSpecList ::= varSpec COMMA  inhabitedCommaSeparatedVarSpecList | varSpec;
-
-seq ::= LBRACKET commaSeparatedList RBRACKET;
-*/

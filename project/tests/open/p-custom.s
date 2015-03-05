@@ -11,10 +11,15 @@
 
 main {
 
-		c := 10;
+		a : string := "multiple line
 
-	/#
-	foo(a,  bar(a, b));
+
+		 string";
+		#c := 10;
+
+
+	
+	
 	a : dict<int, char> := { 1:'1', 2:'2', 3:'3' } ;
 	b : int := 10;
 	c : string := "hello world!";
@@ -27,7 +32,8 @@ main {
 	a:float := ------10.9;
 	b:rat := 1_7/-8;
 	fibonacci( 13 );
+	foo(a,  bar(a, b));
 
-	#/
+	
 	return;
 }

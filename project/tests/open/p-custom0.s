@@ -4,4 +4,4 @@ main {
 	forall(n in a) do
 		print n * 2;
 	od return;
-}
+};

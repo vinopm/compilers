@@ -1,5 +1,5 @@
-alias seq<char> string;
-tdef person {name:string}; # person fdefinition
+
+tdef person {name:string, surname:string, age:int}; # person fdefinition
 
 tdef family {mother:person, father:person, children:seq<person>}; # family fdefinition
 
@@ -8,7 +8,7 @@ main {
 # here we generate
 /# a family #/
 
-  m:person := "aaaaAAA";
+  m:person := "aaaaAAA", "bbBB0_i", 40;
   p:person := "aaabAAA", "bbBB0_i", 35;
   c1:person := "aaabAAA", "bbBB0_i", 1;
   c2:person := "aaadAAA", "bbBB0_i", 2;
@@ -18,4 +18,8 @@ main {
   f.children := f.children :: [c3];
 
   return;
-}
+};
+
+fdef bar() {
+  print "Another function after main.";
+};
