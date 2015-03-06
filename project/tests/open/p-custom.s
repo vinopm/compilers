@@ -11,17 +11,22 @@
 
 main {
 
-		a : string := "multiple line
-
-
-		 string";
+		a : string := "multiple line string";
 		#c := 10;
 
 
 	
 	
 	a : dict<int, char> := { 1:'1', 2:'2', 3:'3' } ;
-	b : int := 10;
+	b : int := 
+
+
+
+
+
+
+
+	10;
 	c : string := "hello world!";
 	d : person := "Shin", "Yoo", 30;
 	e : char := 'a';
@@ -29,6 +34,7 @@ main {
 
 	c : int := 9;
 	d:int := "hello"-2.8;
+	e:int := "hello""hello";
 	a:float := ------10.9;
 	b:rat := 1_7/-8;
 	fibonacci( 13 );
